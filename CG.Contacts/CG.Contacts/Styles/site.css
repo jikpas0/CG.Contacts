@@ -1,0 +1,46 @@
+﻿.reduced-width {
+    width: 50%;
+}
+
+.null-padding-right {
+    padding-right: 0px;   
+}
+
+.internal-padding {
+    padding: 10px 0px;
+}
+
+.max-width {
+    width: 100%;
+}
+
+.underOverline {
+    border-top: solid 1px black;
+}
+
+.button-size {
+    padding: 3px;
+    float:right;
+    margin-bottom: 3px;
+}
+
+.upscale-font {
+    font-size: 24px;
+}
+
+.arrow-paddingTop {
+    padding-top:100px;
+}
+
+.float-right {
+    float:right;
+}
+
+.half-margin {
+    margin: 0px 30px;
+}
+
+#dialog {
+    padding: 0px;
+    margin: 0px;
+}

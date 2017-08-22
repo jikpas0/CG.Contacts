@@ -1,0 +1,205 @@
+﻿
+@{
+    ViewBag.Title = "Contacts";
+    Layout = "~/Views/Shared/_LayoutView.cshtml";
+}
+
+<script>
+    function Contacts() {
+        this.Contact = [{
+            Id: 1,
+            Name: 'Joe Bloggs',
+            MobileNumber: 0832232,
+            HomeNumber: 1232312321,
+            EmailAddress: 'joe.bloggs@guess.com'
+        }, {
+            Id: 2,
+            Name: 'John Doe',
+            MobileNumber: 676767674,
+            HomeNumber: 345453544,
+            EmailAddress: 'john.doe@guess.com'
+        }, {
+            Id: 3,
+            Name: 'Jack Black',
+            MobileNumber: 234243324,
+            HomeNumber: 6576757,
+            EmailAddress: 'jack.black@guess.com',
+        }];
+    }
+</script>
+<script>
+        'use strict';
+        angular.module('myApp', []).controller('MainCtrl', function MainCtrl($scope) {
+            $scope.contacts = new Contacts();   
+            $scope.isShowList = true;
+            $scope.display = {};
+            $scope.selected = function(value) {
+                $scope.display = $scope.contacts.Contact[value - 1];
+            }
+    });
+</script>
+<script>
+        'use strict';
+        angular.module('myApp').component('listContacts', {
+        template: '<span>Name: {{$ctrl.contacts.Name}}</span><br /><p>MobileNumber: {{$ctrl.contacts.MobileNumber}}</p>',
+        bindings: {
+            item: '='
+        }
+        });
+</script> 
+
+<h2>Contacts</h2>
+<br />
+<div ng-app="myApp" ng-controller="MainCtrl as ctrl">
+    <div class="container reduced-width" ng-show="isShowList">
+        <div class="row">
+            <div class="col-md-5 table-underline">
+                Your Contacts
+            </div>
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-5 table-underline">
+                <button type="button" class="btn btn-primary button-size">Sync</button>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-5 underOverline half-margin form-inline internal-padding" ng-repeat="it in contacts.Contact track by $index">
+                <div class="col-md-6">
+                    <i class="fa fa-smile-o" aria-hidden="true"></i> {{it.Name}}
+                </div>
+                <div class="col-md-6 null-padding-right">
+                    <button type="button" class="btn btn-secondary button-size opener" ng-click="selected(it.Id)">Edit</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-info max-width" ng-click="isShowList = false">NEW CONTACT</button>
+            </div>
+        </div>      
+    </div>
+    <div class="container reduced-width" ng-show="!isShowList">        
+        <div class="row">
+            <div class="col-md-1 arrow-paddingTop">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-10">
+                <div class="container-fluid">
+                    <div class="row form">
+                        <div class="col-md-12 internal-padding">
+                            <h2><i class="fa fa-smile-o" aria-hidden="true"></i>  Name Hello</h2>
+                            <button type="button" class="btn btn-warning float-right" ng-click="isShowList = true">CANCEL</button>
+                        </div>
+                    </div>
+                    <div class="row internal-padding form-inline">
+                        <div class="form-group">
+                            <label class="col-sm-5" for="mobileNumber">Mobile number:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" id="mobileNumber">
+                            </div>
+                        </div>                
+                    </div>
+                    <div class="row internal-padding form-inline">
+                        <div class="form-group">
+                            <label class="col-sm-5" for="homeNumber">Home number:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" id="homeNumber">
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="row internal-padding form-inline">
+                        <div class="form-group">
+                            <label class="col-sm-5" for="email">Email address:</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text" id="email">
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="row internal-padding">
+                        <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
+                            <input type="file" id="myFile">
+                        </form>
+                        <button onclick="myFunction()">Upload</button>
+                        <script>
+                            function myFunction() {
+
+                            }
+                        </script>
+                    </div>
+                    <div class="row internal-padding">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-info max-width" ng-click="isShowList = true">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 arrow-paddingTop">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    <div id="dialog" title="Basic dialog">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-1 arrow-paddingTop">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-10">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 internal-padding">
+                                <h2><i class="fa fa-smile-o" aria-hidden="true"></i>  {{display.Name}}</h2>
+                            </div>
+                        </div>
+                        <div class="row internal-padding">
+                            <div class="col-md-5">
+                                Mobile number
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text" id="email" value="{{display.MobileNumber}}">                                
+                            </div>
+                        </div>
+                        <div class="row internal-padding">
+                            <div class="col-md-5">
+                                Home number
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text" id="email" value="{{display.HomeNumber}}">
+                                
+                            </div>
+                        </div>
+                        <div class="row internal-padding">
+                            <div class="col-md-5">
+                                Email address
+                            </div>
+                            <div class="col-md-7">
+                                <input class="form-control" type="text" id="email" value="{{display.EmailAddress}}">                                
+                            </div>
+                        </div>
+                        <div class="row internal-padding">
+                            <form enctype="multipart/form-data" action="/upload/image" method="post">
+                                <input type="file" id="myFile">
+                            </form>
+                            <button onclick="myFunction()">Upload</button>
+                            <script>
+                                function myFunction() {
+
+                                }
+                            </script>
+                        </div>
+                        <div class="row internal-padding">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-info max-width">SAVE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 arrow-paddingTop">
+                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+

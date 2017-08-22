@@ -1,0 +1,2 @@
+C:\Users\jikpa\source\repos\CG.Contacts\CG.Contacts.Tests\obj\Debug\CG.Contacts.Tests.csprojResolveAssemblyReference.cache
+C:\Users\jikpa\source\repos\CG.Contacts\CG.Contacts.Tests\obj\Debug\CG.Contacts.Tests.csproj.CoreCompileInputs.cache
