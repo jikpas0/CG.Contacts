@@ -29,10 +29,12 @@
 </script>
 <script>
         'use strict';
-        angular.module('myApp', []).controller('MainCtrl', function MainCtrl($scope) {
+        angular.module('myApp', []).controller('MainCtrl', function MainCtrl($scope, $http) {
             $scope.contacts = new Contacts();   
             $scope.isShowList = true;
             $scope.display = {};
+            $scope.newContact = {};
+
             $scope.selected = function (value) {
                 $scope.display = $scope.contacts.Contact[value - 1];
                 $("#dialog").dialog("open");
@@ -49,7 +51,20 @@
                 $scope.contacts.Contact[value - 1] = display;
             }
 
-            $scope.newContact = {};
+            $scope.syncData = function () {
+                // use $.param jQuery function to serialize data from JSON 
+                var data = $scope.contacts.Contact;
+
+                $http.post('../api/ContactSync', data)
+                    .success(function (data, status, headers) {
+                        $scope.PostDataResponse = data;
+                    })
+                    .error(function (data, status, header) {
+                        $scope.ResponseDetails = "Data: " + data +
+                            "<hr />status: " + status +
+                            "<hr />headers: " + header;
+                    });
+            };
     });
 </script>
 <script>
@@ -74,7 +89,7 @@
 
             </div>
             <div class="col-md-5 table-underline">
-                <button type="button" class="btn btn-primary button-size">Sync</button>
+                <button type="button" class="btn btn-primary button-size" ng-click="syncData()">Sync</button>
             </div>
         </div>        
         <div class="row">
@@ -96,14 +111,14 @@
     <div class="container reduced-width" ng-show="!isShowList">        
         <div class="row">
             <div class="col-md-1 arrow-paddingTop">
-                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                
             </div>
             <div class="col-md-10">
                 <div class="container-fluid">
                     <div class="row form">
-                        <div class="col-md-12 internal-padding">
-                            <h2><i class="fa fa-smile-o" aria-hidden="true"></i>  Name Hello</h2>
-                            <button type="button" class="btn btn-warning float-right" ng-click="isShowList = true">CANCEL</button>
+                        <div class="col-md-12 internal-padding form-inline">
+                            <h2 class="col-md-10"><i class="fa fa-smile-o" aria-hidden="true"></i>  New contact</h2>
+                            <button type="button" class="btn btn-warning float-right col-md-2" ng-click="isShowList = true">CANCEL</button>
                         </div>
                     </div>
                     <div class="row internal-padding">                        
@@ -140,14 +155,19 @@
                     </div>
                     <div class="row internal-padding">
                         <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
-                            <input type="file" id="myFile">
-                        </form>
-                        <button onclick="myFunction()">Upload</button>
-                        <script>
-                            function myFunction() {
+                            <div class="row">
+                                <input type="file" id="myFile" />
+                            </div>
+                            <br />
+                            <div class="row">
+                                <button onclick="myFunction()">Upload</button>
+                                <script>
+                                    function myFunction() {
 
-                            }
-                        </script>
+                                    }
+                                </script>
+                            </div>
+                        </form>
                     </div>
                     <div class="row internal-padding">
                         <div class="col-md-12">
@@ -157,11 +177,11 @@
                 </div>
             </div>
             <div class="col-md-1 arrow-paddingTop">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                
             </div>
         </div>
     </div>
-    <div id="dialog" title="Basic dialog">
+    <div id="dialog" title="Edit contact">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-1 arrow-paddingTop">
@@ -199,20 +219,20 @@
                             </div>
                         </div>
                         <div class="row internal-padding">
-                            <form enctype="multipart/form-data" action="/upload/image" method="post">
-                                <input type="file" id="myFile">
-                            </form>
-                            <button onclick="myFunction()">Upload</button>
-                            <script>
-                                function myFunction() {
+                            <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
+                                <div class="row">
+                                    <input type="file" id="myFile" />
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <button onclick="myFunction()">Upload</button>
+                                    <script>
+                                        function myFunction() {
 
-                                }
-                            </script>
-                        </div>
-                        <div class="row internal-padding">
-                            <div class="col-md-12">
-                                <button type="button" class="btn btn-info max-width" ng-click="editExisting(display.Id)">SAVE</button>
-                            </div>
+                                        }
+                                    </script>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
