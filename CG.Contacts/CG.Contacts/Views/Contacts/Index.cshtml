@@ -35,16 +35,21 @@
             $scope.display = {};
             $scope.selected = function (value) {
                 $scope.display = $scope.contacts.Contact[value - 1];
+                $("#dialog").dialog("open");
             };
 
             $scope.saveNew = function () {
                 var length = $scope.contacts.Contact.length;
-                $scope.newContact.Id = length;
+                $scope.newContact.Id = length + 1;
                 $scope.contacts.Contact.push($scope.newContact);
+                $scope.newContact = {};
             };
 
-            $scope.newContact = {
-            };
+            $scope.editExisting = function (value) {
+                $scope.contacts.Contact[value - 1] = display;
+            }
+
+            $scope.newContact = {};
     });
 </script>
 <script>
@@ -206,7 +211,7 @@
                         </div>
                         <div class="row internal-padding">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-info max-width" ng-click="contacts.Contact.push(display)">SAVE</button>
+                                <button type="button" class="btn btn-info max-width" ng-click="editExisting(display.Id)">SAVE</button>
                             </div>
                         </div>
                     </div>
