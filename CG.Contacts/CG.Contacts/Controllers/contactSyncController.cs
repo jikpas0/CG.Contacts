@@ -4,14 +4,20 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using mod = CG.Contacts.Models;
+using System.Runtime.Caching;
 
 namespace CG.Contacts.Controllers
 {
     public class ContactSyncController : ApiController
     {
+        private ObjectCache cache = MemoryCache.Default;
+        private CacheItemPolicy policy = new CacheItemPolicy();
+
         // GET: api/ContactSync
         public IEnumerable<string> Get()
         {
+            List<mod.Contacts> cachedValue = (List<mod.Contacts>)cache.Get("contactsValue");
             return new string[] {  };
         }
 
@@ -22,8 +28,9 @@ namespace CG.Contacts.Controllers
         }
 
         // POST: api/ContactSync
-        public string Post([FromBody]string value)
+        public string Post(IEnumerable<mod.Contacts> value)
         {
+            cache.Set("contactsValue", value, policy);
             return "";
         }
     }

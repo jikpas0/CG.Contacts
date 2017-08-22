@@ -23,9 +23,9 @@
             Name: 'Jack Black',
             MobileNumber: 234243324,
             HomeNumber: 6576757,
-            EmailAddress: 'jack.black@guess.com',
+            EmailAddress: 'jack.black@guess.com'
         }];
-    }
+    };    
 </script>
 <script>
         'use strict';
@@ -34,6 +34,7 @@
             $scope.isShowList = true;
             $scope.display = {};
             $scope.newContact = {};
+            $scope.display = $scope.contacts.Contact[$scope.contacts.Contact.length - 1];
 
             $scope.selected = function (value) {
                 $scope.display = $scope.contacts.Contact[value - 1];
@@ -48,12 +49,12 @@
             };
 
             $scope.editExisting = function (value) {
-                $scope.contacts.Contact[value - 1] = display;
+                $scope.contacts.Contact[value - 1] = $scope.display;
             }
 
             $scope.syncData = function () {
                 // use $.param jQuery function to serialize data from JSON 
-                var data = $scope.contacts.Contact;
+                var data = JSON.parse(JSON.stringify($scope.contacts.Contact));
 
                 $http.post('../api/ContactSync', data)
                     .success(function (data, status, headers) {
@@ -154,7 +155,7 @@
                         </div>                         
                     </div>
                     <div class="row internal-padding">
-                        <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
+                        <form enctype="multipart/form-data" action="api/upload" method="post" style="padding-left:30px">
                             <div class="row">
                                 <input type="file" id="myFile" />
                             </div>
@@ -243,4 +244,3 @@
         </div>
     </div>    
 </div>
-
