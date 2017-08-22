@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CG.Contacts", "CG.Contacts\CG.Contacts.csproj", "{03DAFD73-5956-4C3E-ABE4-DB9031526235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CG.Contacts.Tests", "CG.Contacts.Tests\CG.Contacts.Tests.csproj", "{26AFB32A-6E36-4B41-ADB9-E500DE7E82E6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{03DAFD73-5956-4C3E-ABE4-DB9031526235}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03DAFD73-5956-4C3E-ABE4-DB9031526235}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03DAFD73-5956-4C3E-ABE4-DB9031526235}.Release|Any CPU.Build.0 = Release|Any CPU
-		{26AFB32A-6E36-4B41-ADB9-E500DE7E82E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{26AFB32A-6E36-4B41-ADB9-E500DE7E82E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{26AFB32A-6E36-4B41-ADB9-E500DE7E82E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{26AFB32A-6E36-4B41-ADB9-E500DE7E82E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
