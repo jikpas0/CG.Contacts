@@ -33,9 +33,18 @@
             $scope.contacts = new Contacts();   
             $scope.isShowList = true;
             $scope.display = {};
-            $scope.selected = function(value) {
+            $scope.selected = function (value) {
                 $scope.display = $scope.contacts.Contact[value - 1];
-            }
+            };
+
+            $scope.saveNew = function () {
+                var length = $scope.contacts.Contact.length;
+                $scope.newContact.Id = length;
+                $scope.contacts.Contact.push($scope.newContact);
+            };
+
+            $scope.newContact = {
+            };
     });
 </script>
 <script>
@@ -92,29 +101,37 @@
                             <button type="button" class="btn btn-warning float-right" ng-click="isShowList = true">CANCEL</button>
                         </div>
                     </div>
-                    <div class="row internal-padding form-inline">
-                        <div class="form-group">
-                            <label class="col-sm-5" for="mobileNumber">Mobile number:</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" type="text" id="mobileNumber">
-                            </div>
-                        </div>                
-                    </div>
-                    <div class="row internal-padding form-inline">
-                        <div class="form-group">
-                            <label class="col-sm-5" for="homeNumber">Home number:</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" type="text" id="homeNumber">
-                            </div>  
+                    <div class="row internal-padding">                        
+                        <div class="col-sm-5 float-left">
+                            <label for="email">Name:</label>
                         </div>
+                        <div class="col-sm-7 float-right">
+                            <input class="form-control" type="text" id="name" ng-model="newContact.Name">
+                        </div>                       
                     </div>
-                    <div class="row internal-padding form-inline">
-                        <div class="form-group">
-                            <label class="col-sm-5" for="email">Email address:</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" type="text" id="email">
-                            </div>
-                        </div> 
+                    <div class="row internal-padding">                        
+                        <div class="col-sm-5 float-left">
+                            <label for="email">Mobile number:</label>
+                        </div>
+                        <div class="col-sm-7 float-right">
+                            <input class="form-control" type="text" id="mobileNumber" ng-model="newContact.MobileNumber">
+                        </div>                                      
+                    </div>
+                    <div class="row internal-padding">                        
+                        <div class="col-sm-5 float-left">
+                            <label for="email">Home number:</label>
+                        </div>
+                        <div class="col-sm-7 float-right">
+                            <input class="form-control" type="text" id="homeNumber" ng-model="newContact.HomeNumber">
+                        </div>                          
+                    </div>
+                    <div class="row internal-padding">                        
+                        <div class="col-sm-5 float-left">
+                            <label for="email">Email address:</label>
+                        </div>
+                        <div class="col-sm-7 float-right">
+                            <input class="form-control" type="text" id="email" ng-model="newContact.EmailAddress">
+                        </div>                         
                     </div>
                     <div class="row internal-padding">
                         <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
@@ -129,7 +146,7 @@
                     </div>
                     <div class="row internal-padding">
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-info max-width" ng-click="isShowList = true">SAVE</button>
+                            <button type="button" class="btn btn-info max-width" ng-click="isShowList = true; saveNew();">SAVE</button>
                         </div>
                     </div>
                 </div>
@@ -153,28 +170,27 @@
                             </div>
                         </div>
                         <div class="row internal-padding">
-                            <div class="col-md-5">
+                            <div class="col-md-5 float-left">
                                 Mobile number
                             </div>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="email" value="{{display.MobileNumber}}">                                
+                            <div class="col-md-7 float-right">
+                                <input class="form-control" type="text" id="email" ng-model="display.MobileNumber" value="{{display.MobileNumber}}">                                
                             </div>
                         </div>
                         <div class="row internal-padding">
-                            <div class="col-md-5">
+                            <div class="col-md-5 float-left">
                                 Home number
                             </div>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="email" value="{{display.HomeNumber}}">
-                                
+                            <div class="col-md-7 float-right">
+                                <input class="form-control" type="text" id="email" ng-model="display.HomeNumber" value="{{display.HomeNumber}}">                                
                             </div>
                         </div>
                         <div class="row internal-padding">
-                            <div class="col-md-5">
+                            <div class="col-md-5 float-left">
                                 Email address
                             </div>
-                            <div class="col-md-7">
-                                <input class="form-control" type="text" id="email" value="{{display.EmailAddress}}">                                
+                            <div class="col-md-7 float-right">
+                                <input class="form-control" type="text" id="email" ng-model="display.EmailAddress" value="{{display.EmailAddress}}">                                
                             </div>
                         </div>
                         <div class="row internal-padding">
@@ -190,7 +206,7 @@
                         </div>
                         <div class="row internal-padding">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-info max-width">SAVE</button>
+                                <button type="button" class="btn btn-info max-width" ng-click="contacts.Contact.push(display)">SAVE</button>
                             </div>
                         </div>
                     </div>

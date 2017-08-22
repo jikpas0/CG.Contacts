@@ -31,9 +31,12 @@
 .arrow-paddingTop {
     padding-top:100px;
 }
+.float-left {
+    float: left;
+}
 
 .float-right {
-    float:right;
+    float: right;
 }
 
 .half-margin {
