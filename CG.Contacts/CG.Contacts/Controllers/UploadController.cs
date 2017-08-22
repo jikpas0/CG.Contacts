@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace CG.Contacts.Controllers
 {
-    public class DefaultController : ApiController
+    public class UploadController : ApiController
     {
         // GET: api/Default
         public IEnumerable<string> Get()

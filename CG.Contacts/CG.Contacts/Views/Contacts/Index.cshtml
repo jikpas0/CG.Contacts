@@ -220,7 +220,7 @@
                             </div>
                         </div>
                         <div class="row internal-padding">
-                            <form enctype="multipart/form-data" action="/upload/image" method="post" style="padding-left:30px">
+                            <form enctype="multipart/form-data" action="api/upload" method="post" style="padding-left:30px">
                                 <div class="row">
                                     <input type="file" id="myFile" />
                                 </div>
@@ -233,7 +233,12 @@
                                         }
                                     </script>
                                 </div>
-                            </form>
+                            </form>                            
+                        </div>
+                        <div class="row internal-padding">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-info max-width" ng-click="editExisting(display.Id)">SAVE</button>
+                            </div>
                         </div>
                     </div>
                 </div>
